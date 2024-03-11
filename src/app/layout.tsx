@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +15,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const ids = ["SSG", "ISR", "SSR", "CSR"];
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <nav className="flex w-[1080px] h-[80px] justify-evenly items-center mx-auto my-10">
+          {ids.map((id) => (
+            <p key={id} className="text-[24px] font-bold">
+              <Link href={`/${id.toLowerCase()}`}>{id}</Link>
+            </p>
+          ))}
+        </nav>
+        {children}
+      </body>
     </html>
   );
 }
